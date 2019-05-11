@@ -36,9 +36,17 @@ public class HttpHelper {
                 while ( (inputLine = in.readLine()) != null ) {
                     response.append( inputLine );
                 }
+            } catch ( Exception e ) {
+            	if ( conn.getErrorStream() != null ) {
+                	response = new StringBuilder();
+                    try ( BufferedReader in = new BufferedReader( new InputStreamReader( conn.getErrorStream() ) ) ) {
+                        String inputLine;
+                        while ( (inputLine = in.readLine()) != null ) {
+                            response.append( inputLine );
+                        }
+                    }
+            	}
             }
-
-            System.out.println(response.toString());
 
             return response.toString();
 
