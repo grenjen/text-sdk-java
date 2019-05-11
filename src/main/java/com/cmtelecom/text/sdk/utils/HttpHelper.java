@@ -1,8 +1,9 @@
 package com.cmtelecom.text.sdk.utils;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
+import java.io.BufferedWriter;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -23,8 +24,9 @@ public class HttpHelper {
             if ( data != null ) {
                 // Send request
                 conn.setDoOutput( true );
-                try ( DataOutputStream wr = new DataOutputStream( conn.getOutputStream() ) ) {
-                    wr.writeBytes( data );
+                try ( BufferedWriter bw = new BufferedWriter( new OutputStreamWriter( conn.getOutputStream(), "UTF-8" ) ) ) {
+                    bw.write( data );
+                    bw.flush();
                 }
             }
             
