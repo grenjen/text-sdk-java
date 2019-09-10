@@ -1,6 +1,7 @@
 package com.cmtelecom.text.sdk;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.cmtelecom.text.sdk.models.Message;
 import com.cmtelecom.text.sdk.models.Request;
 import com.cmtelecom.text.sdk.models.Response;
@@ -68,7 +69,7 @@ public class MessagingClient {
         request.setMessages( msg );
         messages.setMessages( request );
         try {
-            return new Gson().toJson( messages );
+        	return new GsonBuilder().setPrettyPrinting().create().toJson(messages);
         }
         catch ( Exception e ) {
             throw new RuntimeException( "Invalid request body", e );
